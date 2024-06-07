@@ -1,25 +1,27 @@
 package student.examples;
 
-import junit.framework.Assert;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+
+import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 import student.examples.devices.HasPowerStates;
 import student.examples.devices.VacumCleaner;
 
 public class HasPowerStateTest {
     private HasPowerStates hasPowerStates;
 
-    @BeforeEach
+    @BeforeTest(alwaysRun = true)
     public void setup(){
         hasPowerStates = new VacumCleaner(2,"Jimmy");
     }
-    @Test
+    @Test(groups = {"unit"})
     public void testSwitchOn(){
         hasPowerStates.switchOn();
         Assert.assertTrue(hasPowerStates.isOn());
     }
 
-    @Test
+    @Test(groups = {"unit"})
     public void testSwitchOff(){
         hasPowerStates.switchOff();
         Assert.assertFalse(hasPowerStates.isOn());

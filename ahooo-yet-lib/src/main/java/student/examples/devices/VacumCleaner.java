@@ -3,7 +3,7 @@ package student.examples.devices;
 import static student.examples.devices.PowerState.OFF;
 import static student.examples.devices.PowerState.ON;
 
-public class VacumCleaner extends Device implements HasPowerStates,HasBattery {
+public class VacumCleaner extends NetworkDevice implements HasPowerStates,HasBattery {
     private final int MIN_CHARGE = 10;
     private PowerState powerState;
     private int charge;

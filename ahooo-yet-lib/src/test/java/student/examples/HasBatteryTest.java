@@ -1,26 +1,23 @@
 package student.examples;
 
-import junit.framework.Assert;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 import student.examples.devices.HasBattery;
 import student.examples.devices.HasPowerStates;
 import student.examples.devices.VacumCleaner;
 
 public class HasBatteryTest {
-
     private HasBattery hasBattery;
-    private HasPowerStates hasPowerStates;
 
-    @BeforeEach
+    @BeforeTest(alwaysRun = true)
     public void setup(){
         hasBattery = new VacumCleaner(1,"Atom");
         hasBattery.setCharge(50);
-
-        hasPowerStates = new VacumCleaner(2,"Jimmy");
     }
 
-    @Test
+    @Test(groups = {"unit"})
     public void testOverCharge(){
         final int TARGET_CHARGE = 100;
         int chargeBefore = hasBattery.getCharge();
@@ -37,7 +34,7 @@ public class HasBatteryTest {
         Assert.assertEquals(100,hasBattery.getCharge());
 
     }
-    @Test
+    @Test(groups = {"unit"})
     public void testUnderDischarge(){
         final int MINIMAL_TARGET = 0;
         int chargeBefore = hasBattery.getCharge();
