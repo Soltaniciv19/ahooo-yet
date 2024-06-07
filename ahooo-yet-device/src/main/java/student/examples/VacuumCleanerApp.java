@@ -14,9 +14,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class VacuumCleanerApp {
-
     private static final Logger logger = LoggerFactory.getLogger(VacuumCleanerApp.class);
-
     public static void main(String[] args) {
         logger.info("Starting");
         VacumCleaner vacuumCleaner = new VacumCleaner();
