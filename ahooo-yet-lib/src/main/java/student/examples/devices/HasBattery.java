@@ -5,4 +5,6 @@ public interface HasBattery {
     public boolean disCharge();
     public boolean isCharge();
     public int getCharge();
+    public void setCharge(int charge);
+
 }

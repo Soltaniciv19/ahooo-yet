@@ -17,7 +17,8 @@ public class VacuumCleanerApp {
     private static final Logger logger = LoggerFactory.getLogger(VacuumCleanerApp.class);
     public static void main(String[] args) {
         logger.info("Starting");
-        VacumCleaner vacuumCleaner = new VacumCleaner();
+        VacumCleaner vacuumCleaner = new VacumCleaner(1,"Atom");
+        System.out.println(vacuumCleaner);
         logger.info(String.format("Vacuum cleaner on: %b", vacuumCleaner.isOn()));
 
         try (Socket socket = new Socket(Configuration.HOST, Configuration.PORT);
