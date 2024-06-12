@@ -1,0 +1,32 @@
+<dataset>
+    <entry>
+        <input>-5</input><expected>0</expected>
+    </entry>
+    <entry>
+        <input>0</input><expected>0</expected>
+    </entry>
+    <entry>
+        <input>5</input><expected>5</expected>
+    </entry>
+    <entry>
+        <input>10</input><expected>10</expected>
+    </entry>
+    <entry>
+        <input>15</input><expected>15</expected>
+    </entry>
+    <entry>
+        <input>80</input><expected>80</expected>
+    </entry>
+    <entry>
+        <input>85</input><expected>85</expected>
+    </entry>
+    <entry>
+        <input>95</input><expected>95</expected>
+    </entry>
+    <entry>
+        <input>100</input><expected>100</expected>
+    </entry>
+    <entry>
+        <input>105</input><expected>100</expected>
+    </entry>
+</dataset>
