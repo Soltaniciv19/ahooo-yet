@@ -25,7 +25,8 @@ public class IterativeChargeTest {
                 "ORDER BY (id) ASC;");
 
         while(result.next()){
-            vacuumCleaner.charge();
+            vacuumCleaner.setCharge(result.getInt(2));
+            Assert.assertEquals(vacuumCleaner.getCharge(),result.getInt(3));
         }
 
 
