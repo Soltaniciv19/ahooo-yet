@@ -11,40 +11,29 @@ import student.examples.devices.VacumCleaner;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.InetAddress;
 import java.net.Socket;
 
 public class VacuumCleanerApp {
     private static final Logger logger = LoggerFactory.getLogger(VacuumCleanerApp.class);
-    public static void main(String[] args) {
-        logger.info("Starting");
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        logger.info("CLIENT: Starting");
+
         VacumCleaner vacuumCleaner = new VacumCleaner(1,"Atom");
-        System.out.println(vacuumCleaner);
-        logger.info(String.format("Vacuum cleaner on: %b", vacuumCleaner.isOn()));
+        Socket socket = new Socket(InetAddress.getLocalHost(), Configuration.PORT);
+        ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+        ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 
-        try (Socket socket = new Socket(Configuration.HOST, Configuration.PORT);
-             ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-             ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream())) {
+        ClientCommand clientCommand = new ClientCommand(CommandType.IDENTITY,vacuumCleaner);
 
-            ServerCommand serverCommand = (ServerCommand) ois.readObject();
-            ClientCommand clientCommand = new ClientCommand(CommandType.ACKNOWLEDGE);
+        oos.writeObject(clientCommand);
+        oos.flush();
 
-            if (serverCommand.getType().equals(CommandType.TURN_ON)) {
-                vacuumCleaner.switchOn();
-                logger.info("Client received TURN_ON command from server!");
+        ServerCommand commandFromServer = (ServerCommand) ois.readObject();
 
-            } else if (serverCommand.getType().equals(CommandType.TURN_OFF)) {
-                vacuumCleaner.switchOff();
-                logger.info("Client received TURN_OFF command from server!");
-            }
-
-            oos.writeObject(clientCommand);
-            oos.flush();
-
-            logger.info(String.format("Vacuum cleaner on: %b", vacuumCleaner.isOn()));
-        } catch (IOException | ClassNotFoundException e) {
-            logger.error("Error occurred: ", e);
+        if (commandFromServer.getType().equals(CommandType.ACKNOWLEDGE)) {
+            System.out.println("Connected to server!");
         }
-
 
         logger.info("Stopping");
         }
