@@ -3,12 +3,14 @@ package student.examples;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.apache.commons.io.FileUtils;
 import student.examples.devices.VacumCleaner;
+import student.examples.listeners.VacumCleanerTestListener;
 
 import java.io.File;
 import java.sql.DriverManager;
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+@Listeners(VacumCleanerTestListener.class)
 public class VacuumCleanerTest {
     VacumCleaner vacumCleaner;
 
